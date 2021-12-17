@@ -12,6 +12,7 @@ namespace Blackout
         public override Version RequiredExiledVersion { get; } = new Version(3, 0, 0);
         
         public static Config SharedConfig { get; set; }
+        public static DateTime lastUsed;
         public override PluginPriority Priority => PluginPriority.Last;
 
         public override void OnEnabled()

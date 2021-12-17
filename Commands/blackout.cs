@@ -18,7 +18,6 @@ namespace Blackout.Commands
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player ply = Player.Get((CommandSender) sender);
-            
             if (ply.Role != RoleType.Scp079)
             {
                 response = "You are not SCP-079!";
@@ -34,6 +33,12 @@ namespace Blackout.Commands
                 response = $"You do not have enough power! {Plugin.SharedConfig.AuxillaryDrain} required.";
                 return false;
             }
+            if (Plugin.lastUsed + TimeSpan.FromSeconds(Plugin.SharedConfig.BlackoutCooldown) > DateTime.Now)
+            {
+                response = $"You can't use this command for another {(Plugin.lastUsed + TimeSpan.FromSeconds(Plugin.SharedConfig.BlackoutCooldown) - DateTime.Now).Seconds} seconds.";
+                return false;
+            }
+            Plugin.lastUsed = DateTime.Now;
             ply.Energy -= Plugin.SharedConfig.AuxillaryDrain;
             
             if (Plugin.SharedConfig.CassieAnnouncement != string.Empty)

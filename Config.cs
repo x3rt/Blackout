@@ -11,6 +11,8 @@ namespace Blackout
         public bool BlackoutSurface { get; set; } = false;
         [Description("How long should the global blackout last")]
         public float BlackoutDuration { get; set; } = 60f;
+        [Description("Cooldown between blackouts")]
+        public float BlackoutCooldown { get; set; } = 60f;
         [Description("Text to display when the blackout is active. Leave empty to disable")]
         public string CassieAnnouncement { get; set; } = string.Empty;
         [Description("If cassie starting chime should be muted (same as cassie_sl command)")]
